@@ -32,6 +32,11 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.python" },
     { import = "lazyvim.plugins.extras.lang.go" },
     { import = "lazyvim.plugins.extras.lang.rust" },
+
+    -- === DEBUGGING (DAP) EXTRAS ===
+    -- 1. Imports the core DAP functionality and setup (nvim-dap)
+    { import = "lazyvim.plugins.extras.dap.core" },
+
     { import = "plugins" },
   },
   -- Configure any other settings here. See the documentation for more details.
@@ -39,4 +44,5 @@ require("lazy").setup({
   -- install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
+  library = { "nvim-dap-ui" },
 })
