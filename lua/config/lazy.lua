@@ -26,8 +26,12 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    { "LazyVim/LazyVim",                                import = "lazyvim.plugins" },
     -- import your plugins
+    { import = "lazyvim.plugins.extras.lang.typescript" },
+    { import = "lazyvim.plugins.extras.lang.python" },
+    { import = "lazyvim.plugins.extras.lang.go" },
+    { import = "lazyvim.plugins.extras.lang.rust" },
     { import = "plugins" },
   },
   -- Configure any other settings here. See the documentation for more details.
