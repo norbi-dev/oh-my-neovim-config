@@ -3,54 +3,73 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
-    "hrsh7th/nvim-cmp", -- Optional: for autocomplete integration
+    "hrsh7th/nvim-cmp",
+    -- Added mini.nvim because you configured 'mini_diff' below
+    "nvim-mini/mini.nvim", 
   },
   keys = {
-    { "<leader>ic", "<cmd>CodeCompanionChat Toggle<cr>", desc = "AI Chat" },
-    { "<leader>ia", "<cmd>CodeCompanionActions<cr>", desc = "AI Actions" },
-    { "<leader>ii", "<cmd>CodeCompanion<cr>", desc = "AI Inline" },
-    { "ga", "<cmd>CodeCompanionChat Add<cr>", mode = "v", desc = "Add to AI Chat" },
+    { "<leader>ia", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" }, desc = "AI Actions" },
+    { "<leader>ii", "<cmd>CodeCompanion<cr>", mode = { "n", "v" }, desc = "AI Inline Assistant" },
   },
   config = function()
     require("codecompanion").setup({
       strategies = {
-        chat = {
-          adapter = "ollama",
-          roles = { llm = "Agent", user = "Me" },
-          slash_commands = {
-            ["file"] = {
-              callback = "strategies.chat.slash_commands.file",
-              description = "Select a file to search and read",
-              opts = { contains_code = true },
-            },
-            ["buffer"] = {
-              callback = "strategies.chat.slash_commands.buffer",
-              description = "Insert the current buffer content",
-              opts = { contains_code = true },
-            },
-          },
-        },
-        inline = {
-          adapter = "ollama",
-        },
-        agent = {
-          adapter = "ollama",
-        },
+        chat = { adapter = "ollama" },
+        inline = { adapter = "ollama" },
+        agent = { adapter = "ollama" },
       },
       adapters = {
         ollama = function()
           return require("codecompanion.adapters").extend("ollama", {
             schema = {
-              model = {
-                default = "qwen2.5-coder:7b", -- 7b is MUCH better for "Agent" tasks like unit tests
-              },
-              num_ctx = {
-                default = 8192, -- Increased context for reading larger files
-              },
+              model = { default = "qwen2.5-coder:7b" },
+              num_ctx = { default = 8192 },
             },
           })
         end,
       },
+      display = {
+        diff = {
+          enabled = true,
+          provider = "mini_diff", 
+        },
+      },
+      -- FIXED SECTION BELOW
+      prompt_library = {
+        ["Refactor"] = {
+          strategy = "inline",
+          description = "Refactor the selected code",
+          opts = {
+            modes = { "v" },
+            short_name = "refactor",
+            auto_submit = true,
+            user_prompt = false,
+            stop_context_insertion = true, -- This means YOU must provide the code manually below
+          },
+          prompts = {
+            {
+              role = "system",
+              content = "You are an expert refactoring assistant. Refactor the code for clarity. Return ONLY the code.",
+            },
+            {
+              role = "user",
+              content = function(context)
+                -- FIX: Read the lines from the buffer using the context line numbers
+                local text = require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
+                
+                -- Fallback if the helper isn't available (standard Vim API):
+                if not text then
+                  local lines = vim.api.nvim_buf_get_lines(context.bufnr, context.start_line - 1, context.end_line, false)
+                  text = table.concat(lines, "\n")
+                end
+
+                return "Refactor this code:\n" .. text
+              end,
+            },
+          },
+        },
+      },
+      -- END FIXED SECTION
     })
   end,
 }
