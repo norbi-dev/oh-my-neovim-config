@@ -41,7 +41,7 @@ The goal: a capable dev environment where local inline completion handles fast, 
 | [Rust](https://rustup.rs) | stable | Rust LSP (rust-analyzer), only needed if using Rust |
 | [Ollama](https://ollama.com) | any | Local ghost-text AI completion |
 | [OpenCode](https://opencode.ai) | any | AI chat / agentic development |
-| A [Nerd Font](https://www.nerdfonts.com) | any | icons in the UI |
+| [Nerd Font](https://www.nerdfonts.com) | any | icons in the UI |
 
 > **Note:** Language tools (Go, Rust, Python, TypeScript) are only activated when you open a file of that type or when a project root marker is detected (e.g. `go.mod`, `Cargo.toml`). You don't need all of them installed.
 
