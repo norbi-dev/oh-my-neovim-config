@@ -1,5 +1,9 @@
 return {
-	"nvim-telescope/telescope.nvim",
-	tag = "v0.1.9",
-	dependencies = { "nvim-lua/plenary.nvim" },
+  -- LazyVim already manages telescope with lazy loading and keymaps.
+  -- Only add overrides here if needed.
+  {
+    "nvim-telescope/telescope.nvim",
+    optional = true,
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
 }

@@ -27,13 +27,6 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 require("lazy").setup({
 	spec = {
 		{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
-		-- import your plugins
-		{ import = "lazyvim.plugins.extras.lang.typescript" },
-		{ import = "lazyvim.plugins.extras.lang.python" },
-		{ import = "lazyvim.plugins.extras.lang.go" },
-		{ import = "lazyvim.plugins.extras.lang.rust" },
-		{ import = "lazyvim.plugins.extras.ai.copilot" },
-		{ import = "lazyvim.plugins.extras.ai.copilot-chat" },
 
 		-- === DEBUGGING (DAP) EXTRAS ===
 		-- 1. Imports the core DAP functionality and setup (nvim-dap)
@@ -45,6 +38,6 @@ require("lazy").setup({
 	-- colorscheme that will be used when installing plugins.
 	-- install = { colorscheme = { "habamax" } },
 	-- automatically check for plugin updates
-	checker = { enabled = true },
+	checker = { enabled = true, frequency = 86400 }, -- check once per day, not every startup
 	library = { "nvim-dap-ui" },
 })
