@@ -10,8 +10,6 @@ return {
 	},
 	opts = {
 		size = 20,
-		-- Using standard quotes for the mapping
-		open_mapping = "<C-\\>",
 		hide_numbers = true,
 		shade_filetypes = {},
 		shade_terminals = true,
