@@ -2,6 +2,19 @@
 
 A LazyVim-based Neovim setup focused on a clean editing experience, multi-language development, local AI assistance, and debugger support — all with fast startup through lazy loading.
 
+## Credits
+
+This config was inspired by the YouTube video
+[**0 to LSP: Neovim RC From Scratch**](https://www.youtube.com/watch?v=w7i4amO_zaE)
+by ThePrimeagen.
+
+From that foundation, AI capabilities were layered on top:
+
+- **Local ghost-text completion** via [llm.nvim](https://github.com/huggingface/llm.nvim) + [Ollama](https://ollama.com) — fully private, runs on your machine, no API key required
+- **Agentic AI chat** via [codecompanion.nvim](https://github.com/olimorris/codecompanion.nvim) + [OpenCode](https://opencode.ai) — remote or local model, context-aware, file/tool access
+
+The goal: a capable dev environment where local inline completion handles fast, repetitive suggestions, and a remote/local agent handles bigger reasoning tasks.
+
 ## Features
 
 - **Theme** — Everforest dark (medium contrast)
@@ -145,3 +158,15 @@ sudo dnf install python3-virtualenv
 :checkhealth
 :checkhealth codecompanion
 ```
+
+## Contributing
+
+This is a personal config. Pull requests are not accepted.
+
+If you find it useful, feel free to fork it and adapt it however you like — that's the point. See the [LICENSE](LICENSE) for details.
+
+To extend or modify the config, see [AGENTS.md](AGENTS.md) for the full guide on adding plugins, languages, changing the AI model, and more.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
