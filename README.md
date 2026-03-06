@@ -2,6 +2,8 @@
 
 A LazyVim-based Neovim setup focused on a clean editing experience, multi-language development, local AI assistance, and debugger support — all with fast startup through lazy loading.
 
+![screen](screenshots/neovim.png)
+
 ## Credits
 
 This config was inspired by the YouTube video
