@@ -34,7 +34,6 @@ return {
       },
       lsp = {
         version = "0.5.3",
-        cmd_env = { LLM_LOG_LEVEL = "DEBUG" },
       },
     },
   },
