@@ -1,7 +1,7 @@
 return {
   {
     "huggingface/llm.nvim",
-    lazy = false,
+    event = { "BufReadPost", "BufNewFile" },
     opts = {
       backend = "ollama",
       url = "http://localhost:11434",

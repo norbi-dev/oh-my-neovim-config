@@ -27,25 +27,23 @@ return {
       -- ── Adapters ──────────────────────────────────────────────────────────
       adapters = {
         -- Ollama local adapter — used for lightweight inline autocomplete
-        http = {
-          ollama_coder = function()
-            return require("codecompanion.adapters").extend("ollama", {
-              name = "ollama_coder",
-              schema = {
-                model = {
-                  default = "qwen2.5-coder:1.5b",
-                },
-                -- Keep responses fast for inline use
-                num_ctx = {
-                  default = 4096,
-                },
-                temperature = {
-                  default = 0.1,
-                },
+        ollama_coder = function()
+          return require("codecompanion.adapters").extend("ollama", {
+            name = "ollama_coder",
+            schema = {
+              model = {
+                default = "qwen2.5-coder:1.5b",
               },
-            })
-          end,
-        },
+              -- Keep responses fast for inline use
+              num_ctx = {
+                default = 4096,
+              },
+              temperature = {
+                default = 0.1,
+              },
+            },
+          })
+        end,
       },
 
       -- ── Interactions ──────────────────────────────────────────────────────
