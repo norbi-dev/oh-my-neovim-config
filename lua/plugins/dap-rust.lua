@@ -1,5 +1,5 @@
 -- Rust debug support via codelldb + nvim-dap.
--- rustaceanvim (loaded by lang.lua) wires the DAP adapter automatically when
+-- rustaceanvim (loaded by lazy.lua) wires the DAP adapter automatically when
 -- mason's codelldb is present. This file ensures nvim-dap is loaded for Rust
 -- buffers and registers a fallback codelldb adapter + configurations so that
 -- standard DAP commands (:DapToggleBreakpoint, :DapContinue, etc.) work even
