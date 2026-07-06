@@ -10,6 +10,7 @@ return {
         "gomod",
         "gosum",
         "gowork",
+        "gotmpl",
         "html",
         "javascript",
         "json",
