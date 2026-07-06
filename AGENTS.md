@@ -16,8 +16,6 @@ any changes.
 │   │   └── lazy.lua          # lazy.nvim bootstrap + top-level spec
 │   └── plugins/              # One file per plugin (auto-imported via { import = "plugins" })
 │       ├── lang.lua          # Language extras (ft-gated)
-│       ├── codecompanion.lua # AI chat + inline assistant
-│       ├── llm.lua           # Ghost-text completion (local Ollama)
 │       ├── everforest.lua    # Colorscheme
 │       ├── treesitter.lua    # Syntax + folding
 │       ├── telescope.lua     # Fuzzy finder
@@ -128,63 +126,6 @@ ls ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/extras/lang/
 
 ---
 
-## How to Change the AI Chat Model
-
-The chat adapter is `opencode` (ACP). The model is controlled by OpenCode's own
-config, not this repo:
-
-```bash
-# ~/.config/opencode/config.json
-{
-  "$schema": "https://opencode.ai/config.json",
-  "model": "anthropic/claude-sonnet-4-5"
-}
-```
-
-To switch to a different codecompanion adapter entirely (e.g. direct Anthropic),
-edit the `interactions.chat` field in `lua/plugins/codecompanion.lua`:
-
-```lua
-interactions = {
-  chat = {
-    adapter = "anthropic",  -- uses ANTHROPIC_API_KEY env var
-  },
-},
-```
-
----
-
-## How to Change the Ghost-Text Model
-
-The ghost-text model is configured in `lua/plugins/llm.lua`. To swap the model:
-
-1. Pull the new model: `ollama pull <model>`
-2. Check its FIM tokens from the modelfile:
-   ```bash
-   curl -s http://localhost:11434/api/show -d '{"name":"<model>"}' | python3 -c \
-     "import sys,json; print(json.load(sys.stdin)['modelfile'][:400])"
-   ```
-3. Update `lua/plugins/llm.lua`:
-   ```lua
-   model = "deepseek-coder:1.3b",
-   fim = {
-     enabled = true,
-     prefix = "<｜fim▁begin｜>",   -- from modelfile
-     middle = "<｜fim▁hole｜>",
-     suffix = "<｜fim▁end｜>",
-   },
-   ```
-
-If the model doesn't support FIM, set `fim = { enabled = false }` — it will
-fall back to standard completion but quality will be worse.
-
-**Good lightweight FIM models for local use:**
-- `qwen2.5-coder:1.5b` (current, ~1GB)
-- `deepseek-coder:1.3b` (~800MB)
-- `starcoder2:3b` (~2GB, higher quality)
-
----
-
 ## How to Add Keymaps
 
 For global keymaps, add to `init.lua` or a dedicated `lua/plugins/keymaps.lua`:
@@ -216,7 +157,6 @@ Follow LazyVim's keymap namespace conventions to avoid conflicts:
 - `<leader>c` — code actions
 - `<leader>d` — debug
 - `<leader>u` — UI toggles
-- `<leader>a` — AI (this config)
 - `<leader>z` — zen mode (this config)
 
 ---
@@ -287,6 +227,5 @@ ls ~/.local/share/nvim/lazy/LazyVim/lua/lazyvim/plugins/extras/
 :LspInfo       — active LSP clients for the current buffer
 :Mason         — installed/available LSP servers, formatters, linters
 :checkhealth   — overall health check
-:checkhealth codecompanion  — AI adapter connectivity
-:LspLog        — raw LSP logs (useful for llm-ls debugging)
+:messages      — recent notifications
 ```

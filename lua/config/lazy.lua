@@ -1,6 +1,6 @@
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
 	local out = vim.fn.system({
 		"git", "clone", "--filter=blob:none", "--branch=stable",
 		"https://github.com/folke/lazy.nvim.git", lazypath,
@@ -37,8 +37,24 @@ require("lazy").setup({
 			import = "lazyvim.plugins.extras.lang.typescript",
 			cond = function()
 				return LazyVim.extras.wants({
-					ft = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+					ft = {
+						"javascript",
+						"javascriptreact",
+						"javascript.jsx",
+						"typescript",
+						"typescriptreact",
+						"typescript.tsx",
+					},
 					root = { "tsconfig.json", "package.json", "jsconfig.json" },
+				})
+			end,
+		},
+		{
+			import = "lazyvim.plugins.extras.lang.svelte",
+			cond = function()
+				return LazyVim.extras.wants({
+					ft = "svelte",
+					root = { "svelte.config.js", "svelte.config.ts" },
 				})
 			end,
 		},
@@ -47,7 +63,14 @@ require("lazy").setup({
 			cond = function()
 				return LazyVim.extras.wants({
 					ft = "python",
-					root = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile" },
+					root = {
+						"pyproject.toml",
+						"setup.py",
+						"setup.cfg",
+						"requirements.txt",
+						"Pipfile",
+						"pyrightconfig.json",
+					},
 				})
 			end,
 		},

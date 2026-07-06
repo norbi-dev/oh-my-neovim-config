@@ -1,29 +1,32 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    branch = "main",
-    event = { "BufReadPost", "BufNewFile" },
-    build = ":TSUpdate",
+    optional = true,
     opts = {
-      -- LazyVim config for treesitter
-      indent = { enable = true }, ---@type lazyvim.TSFeat
-      highlight = { enable = true }, ---@type lazyvim.TSFeat
-      folds = { enable = true }, ---@type lazyvim.TSFeat
       ensure_installed = {
         "bash",
         "diff",
+        "go",
+        "gomod",
+        "gosum",
+        "gowork",
         "html",
         "javascript",
         "json",
         "lua",
         "markdown",
+        "markdown_inline",
         "python",
+        "ron",
+        "rst",
         "rust",
+        "svelte",
         "toml",
         "tsx",
+        "typescript",
         "xml",
-        "yaml"
+        "yaml",
       },
     },
-  }
+  },
 }
