@@ -13,18 +13,19 @@ any changes.
 ├── init.lua                  # Entry point: vim.opt settings, loads config/lazy
 ├── lua/
 │   ├── config/
-│   │   └── lazy.lua          # lazy.nvim bootstrap + top-level spec
+│   │   └── lazy.lua          # lazy.nvim bootstrap + top-level spec + language extras
 │   └── plugins/              # One file per plugin (auto-imported via { import = "plugins" })
-│       ├── lang.lua          # Language extras (ft-gated)
 │       ├── everforest.lua    # Colorscheme
-│       ├── treesitter.lua    # Syntax + folding
-│       ├── telescope.lua     # Fuzzy finder
-│       ├── neo-tree.lua      # File tree
-│       ├── toggleterm.lua    # Terminal
-│       ├── gitsigns.lua      # Git gutter
-│       ├── indent-blankline.lua
-│       ├── rainbow-delimiters.lua
+│       ├── blink.lua         # Completion tweaks
+│       ├── dap-rust.lua      # Rust debug fallback
 │       ├── focus.lua         # Inactive window dimming
+│       ├── gitsigns.lua      # Git gutter
+│       ├── go.lua            # Go language extra
+│       ├── indent-blankline.lua
+│       ├── neo-tree.lua      # File tree
+│       ├── rainbow-delimiters.lua
+│       ├── treesitter.lua    # Syntax + folding
+│       ├── toggleterm.lua    # Terminal
 │       ├── zen-mode.lua      # Distraction-free writing
 │       ├── dap-ui.lua        # Debugger UI
 │       └── venv-selector.lua # Python venv picker
@@ -97,14 +98,15 @@ Delete `lua/plugins/everforest.lua` after adding the new file.
 
 ## How to Add a Language
 
-Language support is in `lua/plugins/lang.lua`. Each entry is a LazyVim extra
+Language support is split between `lua/config/lazy.lua` (TypeScript, Svelte,
+Python, Rust) and `lua/plugins/go.lua` (Go). Each entry is a LazyVim extra
 wrapped in a `cond` guard that activates only when the relevant filetype or
 root marker is detected.
 
 To add a new language, append an entry following the same pattern:
 
 ```lua
--- Inside lua/plugins/lang.lua, add to the return table:
+-- Inside lua/config/lazy.lua or a dedicated plugin file, add to the spec:
 {
   import = "lazyvim.plugins.extras.lang.ruby",
   cond = function()
@@ -148,6 +150,8 @@ this is the preferred approach as it also triggers lazy loading:
   },
 }
 ```
+
+Tree-sitter grammar installs live in `lua/plugins/treesitter.lua`.
 
 **Leader key** is `<Space>`. **Local leader** is `\`.
 

@@ -14,11 +14,13 @@ From that foundation, the config focuses on editing, navigation, and language to
 
 ## Features
 
-- **Theme** — Everforest dark (medium contrast)
-- **Languages** — Python, TypeScript, Go, Rust — each loads only when you open a relevant file
-- **Debugger** — nvim-dap + nvim-dap-ui, auto-opens on session start
+- **Theme** — Everforest dark (hard contrast, italic text)
+- **Languages** — Python, TypeScript, Svelte, Go, Rust — each loads only when you open a relevant file
+- **Debugger** — nvim-dap + nvim-dap-ui, with a Rust codelldb fallback, auto-opens on session start
+- **Completion** — blink.cmp with manual popup/documentation triggers
 - **UI** — indent guides, rainbow brackets, git gutter signs, inactive window dimming, Zen Mode
 - **File tree** — neo-tree with hidden files visible
+- **Python** — venv selector for picking local environments
 - **Terminal** — toggleterm with float/horizontal/vertical modes
 - **Fuzzy finder** — Telescope
 
@@ -36,7 +38,7 @@ From that foundation, the config focuses on editing, navigation, and language to
 | [Rust](https://rustup.rs) | stable | Rust LSP (rust-analyzer), only needed if using Rust |
 | [Nerd Font](https://www.nerdfonts.com) | any | icons in the UI |
 
-> **Note:** Language tools (Go, Rust, Python, TypeScript) are only activated when you open a file of that type or when a project root marker is detected (e.g. `go.mod`, `Cargo.toml`). You don't need all of them installed.
+> **Note:** Language tools (Go, Rust, Python, TypeScript, Svelte) are only activated when you open a file of that type or when a project root marker is detected (e.g. `go.mod`, `Cargo.toml`). You don't need all of them installed.
 
 ## Installation
 
@@ -79,12 +81,22 @@ Lazy.nvim will bootstrap itself and install all plugins on first launch. Mason w
 | `<leader>z` | Toggle Zen Mode |
 | `<leader>uF` | Toggle inactive window dimming |
 
+### Python
+
+| Key | Action |
+|-----|--------|
+| `<leader>vs` | Select Python venv |
+
 ### Git (gitsigns)
 
 | Key | Action |
 |-----|--------|
 | `]h` / `[h` | Next / prev hunk |
 | `<leader>ghs` | Stage hunk |
+| `<leader>ghr` | Reset hunk |
+| `<leader>ghS` | Stage buffer |
+| `<leader>ghu` | Undo stage hunk |
+| `<leader>ghR` | Reset buffer |
 | `<leader>ghp` | Preview hunk |
 | `<leader>ghb` | Blame line |
 | `<leader>ghd` | Diff this |
