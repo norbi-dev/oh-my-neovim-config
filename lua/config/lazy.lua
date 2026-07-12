@@ -2,8 +2,12 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
 	local out = vim.fn.system({
-		"git", "clone", "--filter=blob:none", "--branch=stable",
-		"https://github.com/folke/lazy.nvim.git", lazypath,
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"--branch=stable",
+		"https://github.com/folke/lazy.nvim.git",
+		lazypath,
 	})
 	if vim.v.shell_error ~= 0 then
 		vim.api.nvim_echo({
@@ -80,6 +84,15 @@ require("lazy").setup({
 				return LazyVim.extras.wants({
 					ft = "rust",
 					root = { "Cargo.toml", "rust-project.json" },
+				})
+			end,
+		},
+		{
+			import = "lazyvim.plugins.extras.lang.go",
+			cond = function()
+				return LazyVim.extras.wants({
+					ft = { "go", "gomod", "gowork", "gotmpl" },
+					root = { "go.work", "go.mod" },
 				})
 			end,
 		},
