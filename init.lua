@@ -1,3 +1,5 @@
+vim.g.ai_cmp = false
+
 require("config.lazy")
 
 -- Sync with system clipboard
