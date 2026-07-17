@@ -29,6 +29,10 @@ vim.g.maplocalleader = "\\"
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
+local function wants(opts)
+	return not LazyVim or LazyVim.extras.wants(opts)
+end
+
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
@@ -40,7 +44,7 @@ require("lazy").setup({
 		{
 			import = "lazyvim.plugins.extras.lang.typescript",
 			cond = function()
-				return LazyVim.extras.wants({
+				return wants({
 					ft = {
 						"javascript",
 						"javascriptreact",
@@ -56,7 +60,7 @@ require("lazy").setup({
 		{
 			import = "lazyvim.plugins.extras.lang.svelte",
 			cond = function()
-				return LazyVim.extras.wants({
+				return wants({
 					ft = "svelte",
 					root = { "svelte.config.js", "svelte.config.ts" },
 				})
@@ -65,7 +69,7 @@ require("lazy").setup({
 		{
 			import = "lazyvim.plugins.extras.lang.python",
 			cond = function()
-				return LazyVim.extras.wants({
+				return wants({
 					ft = "python",
 					root = {
 						"pyproject.toml",
@@ -81,7 +85,7 @@ require("lazy").setup({
 		{
 			import = "lazyvim.plugins.extras.lang.rust",
 			cond = function()
-				return LazyVim.extras.wants({
+				return wants({
 					ft = "rust",
 					root = { "Cargo.toml", "rust-project.json" },
 				})
@@ -90,7 +94,7 @@ require("lazy").setup({
 		{
 			import = "lazyvim.plugins.extras.lang.go",
 			cond = function()
-				return LazyVim.extras.wants({
+				return wants({
 					ft = { "go", "gomod", "gowork", "gotmpl" },
 					root = { "go.work", "go.mod" },
 				})
