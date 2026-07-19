@@ -22,7 +22,7 @@ From that foundation, the config focuses on editing, navigation, and language to
 - **File tree** — neo-tree with hidden files visible
 - **Python** — venv selector for picking local environments
 - **Terminal** — toggleterm with float/horizontal/vertical modes
-- **Fuzzy finder** — Telescope
+- **Fuzzy finder** — FzfLua
 
 ## Prerequisites
 
@@ -31,14 +31,21 @@ From that foundation, the config focuses on editing, navigation, and language to
 | [Neovim](https://neovim.io) | **0.12.0** | everything |
 | [git](https://git-scm.com) | any | lazy.nvim bootstrap, gitsigns |
 | [curl](https://curl.se) | any | Mason |
-| [ripgrep](https://github.com/BurntSushi/ripgrep) | any | Telescope live grep |
+| [fzf](https://github.com/junegunn/fzf) | any | FzfLua pickers, including LSP definitions |
+| [ripgrep](https://github.com/BurntSushi/ripgrep) | any | FzfLua live grep |
 | [Node.js](https://nodejs.org) (via [nvm](https://github.com/nvm-sh/nvm)) | 18+ | Mason LSP installers |
 | [Python 3](https://www.python.org) + `python3-venv` | 3.10+ | Python LSP (pyright, ruff), nvim-dap-python |
 | [Go](https://go.dev) | 1.21+ | Go LSP (gopls), only needed if using Go |
-| [Rust](https://rustup.rs) | stable | Rust LSP (rust-analyzer), only needed if using Rust |
+| [Rust](https://rustup.rs) | stable, with `cargo` and `rustc` in `PATH` | Rust LSP (rust-analyzer), only needed if using Rust |
 | [Nerd Font](https://www.nerdfonts.com) | any | icons in the UI |
 
 > **Note:** Language tools (Go, Rust, Python, TypeScript, Svelte) are only activated when you open a file of that type or when a project root marker is detected (e.g. `go.mod`, `Cargo.toml`). You don't need all of them installed.
+
+Homebrew's `rustup` formula is keg-only. Add its tool proxies to your shell path:
+
+```bash
+export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
+```
 
 ## Installation
 
